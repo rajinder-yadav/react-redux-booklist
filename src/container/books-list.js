@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {selectBook} from '../actions/books-action';
+import {doSelectBook} from '../actions/books-action';
 import {bindActionCreators} from 'redux';
 
 class BooksList extends Component {
@@ -9,7 +9,7 @@ class BooksList extends Component {
     return this.props.books.map(book => {
       return <li key={book.title}
         className="list-group-item col-sm-4"
-        onClick={() => this.props.selectBook(book)}>{book.title}</li>;
+        onClick={() => this.props.doSelectBook(book)}>{book.title}</li>;
     })
   }
 
@@ -32,7 +32,7 @@ function mapStateToProps(state) {
 // Ties Action to Redux dispatch and makes Action available to component via props.
 // We are able to use the selectBook action to dispatch to Redux.
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({selectBook}, dispatch);
+  return bindActionCreators({doSelectBook}, dispatch);
 }
 
 // Make component a container by connecting state and action dispatch to Redux.
