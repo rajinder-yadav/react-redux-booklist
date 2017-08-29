@@ -14,9 +14,9 @@ class BookDetail extends Component {
 }
 
 // Ties Redux Store state to the Component props, turns component into a Container.
-function mapStateToProps(state) {
+function mapStateToProps(store) {
   return {
-    book: state.activeBook
+    book: store.activeBook
   };
 }
 
