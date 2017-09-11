@@ -1,4 +1,4 @@
-const InitalState = {title: 'Pick a book.'};
+const InitalState = {title: 'Pick a book.', author: null, img: null};
 
 export default function ActiveBookReducer(state = InitalState, {type, payload}) {
   switch(type) {
