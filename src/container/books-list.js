@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {doSelectBook} from '../actions/books-action';
 import {bindActionCreators} from 'redux';
+import {doSelectBook} from '../actions/books-action';
 
 class BooksList extends Component {
   // Click handler dispatches action created by calling selectBook.
