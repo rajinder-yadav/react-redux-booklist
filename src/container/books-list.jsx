@@ -1,9 +1,22 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import {doSelectBook} from '../actions/books-action';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+import { BookService } from '../services/BookService';
+
+// Action creators
+// import { doSelectBook } from '../actions/books-action';
+// import { doFetchBooks } from '../actions/books-action';
+import * as BooksActionCreators from '../actions/books-actions';
 
 class BooksList extends Component {
+
+  componentWillMount() {
+    // This could be moved into App component and loaded there once!
+    const books = BookService.fetchBooks();
+    this.props.doFetchBooks(books);
+  }
+
   // Click handler dispatches action created by calling selectBook.
   createBooksList() {
     return this.props.books.map(book => {
@@ -32,7 +45,7 @@ function mapStateToProps(store) {
 // Ties Action to Redux dispatch and makes Action available to component via props.
 // We are able to use the selectBook action to dispatch to Redux.
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({doSelectBook}, dispatch);
+  return bindActionCreators(BooksActionCreators, dispatch);
 }
 
 // Make component a container by connecting state and action dispatch to Redux.
