@@ -20,8 +20,12 @@ class BooksList extends Component {
   // Click handler dispatches action created by calling selectBook.
   createBooksList() {
     return this.props.books.map(book => {
+      let css ="list-group-item";
+      if(book.id === this.props.activeBook.id) {
+        css += " active";
+      }
       return <li key={book.title}
-        className="list-group-item"
+        className={css}
         onClick={() => this.props.doSelectBook(book)}>{book.title}</li>;
     })
   }
@@ -38,7 +42,8 @@ class BooksList extends Component {
 // Ties Redux Store state to the Component props, turns component into a Container.
 function mapStateToProps(store) {
   return {
-    books: store.books
+    books: store.books,
+    activeBook: store.activeBook
   };
 }
 
