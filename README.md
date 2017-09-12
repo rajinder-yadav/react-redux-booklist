@@ -10,7 +10,7 @@ A middleware async dispatcher is used to send actions, see `index.js` for detail
 
 A HOC is a design pattern that define a function that take a component and return a new wrapped component.
 
-Redux make use of HOC, it takes the App component wraps it with the Provider component.
+Redux make use of HOC, it takes the App component wraps it with the Provider component. This make the Redux `store` available to all components.
 
 ```js
 ReactDOM.render(
@@ -28,7 +28,7 @@ document.getElementById('root'));
 
 ## Action
 
-An action creator **must** never mutate the state, fetch data or make an API call. It must be passed data, called a payload, that is used to update the Redux store _state_.
+An action creator **must** never mutate the state, cause no side-effect, fetch data or make an API call. It must be passed data, called a payload, that is used to update the Redux store _state_.
 
 An action creator should be prefixed with 'do', and accept an optional payload parameter.
 
