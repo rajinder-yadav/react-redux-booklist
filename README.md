@@ -1,5 +1,7 @@
 # Redux Booklist React App
 
+[See demo site here](https://rajinder-yadav.github.io/react-redux-booklist/)
+
 This web-application was developed using React.js and uses Redux to work with data.
 
 A middleware async dispatcher is used to send actions, see `index.js` for details.
