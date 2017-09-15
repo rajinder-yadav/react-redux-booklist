@@ -8,7 +8,6 @@ export class BookService {
       database.once("value", snapshot => {
         const books = snapshot.val();
         resolve(books);
-        console.log("XXX", books);
       });
     });
   }
