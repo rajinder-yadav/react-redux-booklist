@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
+
 import { BookService } from '../services/BookService';
 
 // Action creators
@@ -13,7 +14,7 @@ class BooksList extends Component {
 
   componentWillMount() {
     // This could be moved into App component and loaded there once!
-    const books = BookService.fetchBooks();
+    const books = BookService.fetchBooks(this.props.fire);
     this.props.doFetchBooks(books);
   }
 

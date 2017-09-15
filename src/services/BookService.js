@@ -1,41 +1,15 @@
-const books = [
-  {
-    id: 1,
-    title: 'The Dark Tower III: The Waste Lands',
-    author: 'Stephen King',
-    date: '1 January 2016',
-    img: 'dark-tower3.jpg'
-  },
-  {
-    id: 2,
-    title: 'Rich People Problems',
-    author: 'Kevin Kwan',
-    date: '23 May 2017',
-    img: 'rpp.jpg'
-  },
-  {
-    id: 3,
-    title: 'The Whistler: A Novel',
-    author: 'Stephen King',
-    date: '25 October 2016',
-    img: 'whistler.jpg'
-  },
-  {
-    id: 4,
-    title: 'Hunting Hour: A Timber Creek K-9 Mystery',
-    author: 'Margaret Mizushima',
-    date: '8 August 2017',
-    img: 'hh.jpg'
-  },
-];
+import 'firebase/database';
 
 export class BookService {
-  static fetchBooks() {
+  static fetchBooks(fire) {
     return new Promise((resolve, reject) => {
-      // Fake a slow connection
-      setTimeout(() => {
+
+      const database = fire.database().ref().child('books');
+      database.once("value", snapshot => {
+        const books = snapshot.val();
         resolve(books);
-      }, 1000);
-    })
+        console.log("XXX", books);
+      });
+    });
   }
 }
