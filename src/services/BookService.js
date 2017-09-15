@@ -31,6 +31,11 @@ const books = [
 
 export class BookService {
   static fetchBooks() {
-    return books;
+    return new Promise((resolve, reject) => {
+      // Fake a slow connection
+      setTimeout(() => {
+        resolve(books);
+      }, 1000);
+    })
   }
 }

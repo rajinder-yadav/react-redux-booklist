@@ -6,6 +6,14 @@ This web-application was developed using React.js and uses Redux to work with da
 
 A middleware async dispatcher is used to send actions, see `index.js` for details.
 
+The code shows how to use `redux-promise` as a middleware to deal with an asyn request. In class `BookService` a slow connection is faked when returning the list of books.
+
+```js
+import promiseMiddleware from 'redux-promise';
+
+const createStoreWithMiddleware = applyMiddleware(promiseMiddleware)(createStore);
+```
+
 ## Higher Order Components
 
 A HOC is a design pattern that define a function that take a component and return a new wrapped component.
@@ -93,7 +101,7 @@ This is followed by setting up the reducer with Redux store.
 ### src/index.js
 
 ```js
-const createStoreWithMiddleware = applyMiddleware()(createStore);
+const createStoreWithMiddleware = applyMiddleware(promiseMiddleware)(createStore);
 
 ReactDOM.render(
   <Provider store={createStoreWithMiddleware(reducers)}>
