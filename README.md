@@ -1,18 +1,29 @@
 # Redux Booklist React App
 
-[See demo site here](https://rajinder-yadav.github.io/react-redux-booklist/)
+[<h3>Demo website</h3>](https://rajinder-yadav.github.io/react-redux-booklist/)
 
 This web-application was developed using React.js and uses Redux to work with data.
 
-A middleware async dispatcher is used to send actions, see `index.js` for details.
+A middleware async dispatcher is used to send actions, see `src/index.js` for details.
 
-The code shows how to use `redux-promise` as a middleware to deal with an asyn request. In class `BookService` a slow connection is faked when returning the list of books.
+The code shows how to use `redux-promise` as a middleware to deal with asyn request.
 
 ```js
 import promiseMiddleware from 'redux-promise';
 
 const createStoreWithMiddleware = applyMiddleware(promiseMiddleware)(createStore);
 ```
+
+The Service class `BookService` uses _Firebase_ to fetch data from a NoSQL database asynchronously.
+
+This project demonstrates usage of:
+
+* React
+* Redux
+* Firebase
+* Middleware setup
+* redux-promise
+* Service class
 
 ## Higher Order Components
 
