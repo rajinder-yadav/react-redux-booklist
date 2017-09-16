@@ -7,18 +7,19 @@ import firebase from 'firebase/app';
 
 class App extends Component {
 
-  fire;
+  firebase;
 
   componentWillMount() {
-    this.fire = firebase.initializeApp(DB_CONFIG);
+    this.firebase = firebase.initializeApp(DB_CONFIG);
   }
+
   render() {
     return (
       <div className="container-fluid">
         <div className="row mt-3">
           <div className="col-4">
             <h1>Book Listing</h1>
-            <BooksList fire={this.fire} />
+            <BooksList firebase={this.firebase} />
           </div>
           <div className="col ml-3">
             <h2>Book Details</h2>
