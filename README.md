@@ -27,9 +27,9 @@ This project demonstrates usage of:
 
 ## Higher Order Components
 
-A HOC is a design pattern that define a function that take a component and return a new wrapped component.
+A HOC is a design pattern that define a function that takes a component and returns a new wrapped component.
 
-Redux make use of HOC, it takes the App component wraps it with the Provider component. This make the Redux `store` available to all components.
+This Redux application makes use of HOC, it takes the App component and wraps it within the Provider component. This makes the Redux `store` available to all components.
 
 ```js
 ReactDOM.render(
@@ -42,12 +42,12 @@ document.getElementById('root'));
 ## Three Principles of Redux
 
 1. State is immutable
-1. An _action_ is used to cause _state_ to change.
+1. An _action_ is used to cause _state_ to update.
 1. A _reducer_ is a pure-function that returns a new state given an action.
 
 ## Action
 
-An action creator **must** never mutate the state, cause no side-effect, fetch data or make an API call. It must be passed data, called a payload, that is used to update the Redux store _state_.
+An _Action_ creator is responsible for providing data that will be consumed by the reducer to create a new _State_ object.
 
 An action creator should be prefixed with 'do', and accept an optional payload parameter.
 
@@ -66,10 +66,10 @@ _Note_: not all action creators need a `payload` field, some may only need the `
 
 ## Reducer
 
-A reducer is a function that accepts to parameters:
+A _Reducer_ is a _pure_ function that accepts two parameters:
 
-1. state
-1. action
+1. State
+1. Action
 
 ```js
 function(state, action) => state;
@@ -77,7 +77,7 @@ function(state, action) => state;
 
 It is highly advisable to assign a default state, since the initial state will be _undefined_ when the application first starts up.
 
-A reducer function **must** return the _state_ object for an unknown action type.
+For unknown action type, the reducer function **must** return the _state_ object.
 
 ### src/reducers/active-book-reducer.js
 
@@ -97,6 +97,8 @@ export default function ActiveBookReducer(state = InitalState, { type, payload }
 ```
 
 Before registering a reducer with the Redux store, it is a good idea to combine them all using `combineReducers` function.
+
+The `combineReducers` function is what untimately defines the share of the application state in the Redux store.
 
 ### src/reducers/index.js
 
@@ -121,4 +123,37 @@ ReactDOM.render(
 document.getElementById('root'));
 ```
 
-That's it!
+Finally in order for a React component to be able to fetch the state from the Redux store, it need to be turned into a _container_. This is done using the `connect` function provided by the `react-redux` library.
+
+The `connect` call binds a helper function, in the case below `mapStateToProps` and passes in the state object that is return by the reducer function that was defined earlier in `combineReducer`.
+
+The state object is then made available to the component as a property on the `props` variable.
+
+```js
+import { connect } from 'react-redux';
+
+function mapStateToProps(store) {
+  return {
+    books: store.books,
+    activeBook: store.activeBook
+  };
+}
+
+export default connect(mapStateToProps, ...)(BooksList);
+```
+
+If the container also needs to dispatch an action to the Redux store, we make use of `findActionCreators` provided by the `redux` library. This gets bound to the component and made available as a property on the `props` variable.
+
+The dispather sends the action and the payload to **all** the reducer in Redux, which deals with the action accordingly or simply ignores it.
+
+```js
+import { bindActionCreators } from 'redux';
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(BooksActionCreators, dispatch);
+}
+
+export default connect(..., mapDispatchToProps)(BooksList);
+```
+
+That's it for advanced asynchronous Redux!
