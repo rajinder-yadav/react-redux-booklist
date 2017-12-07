@@ -98,7 +98,7 @@ export default function ActiveBookReducer(state = InitalState, { type, payload }
 
 Before registering a reducer with the Redux store, it is a good idea to combine them all using `combineReducers` function.
 
-The `combineReducers` function is what untimately defines the share of the application state in the Redux store.
+The `combineReducers` function is what untimately defines the shape of the application state in the Redux store.
 
 ### src/reducers/index.js
 
@@ -142,7 +142,7 @@ function mapStateToProps(store) {
 export default connect(mapStateToProps, ...)(BooksList);
 ```
 
-If the container also needs to dispatch an action to the Redux store, we make use of `findActionCreators` provided by the `redux` library. This gets bound to the component and made available as a property on the `props` variable.
+If the container also needs to dispatch an action to the Redux store, we make use of `bindActionCreators` provided by the `redux` library. This gets bound to the component and made available as a property on the `props` variable.
 
 The dispather sends the action and the payload to **all** the reducer in Redux, which deals with the action accordingly or simply ignores it.
 
